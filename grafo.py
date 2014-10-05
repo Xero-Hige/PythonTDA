@@ -1,15 +1,18 @@
 from heap import Heap
 from conjuntos_dis import Conjuntos_dis
 
-class _Vertice(object):
+WHITE = 0
+BLACK = 1
+
+class _Vertex(object):
 	"""Clase vertice que modela los vertices de un grafo"""
 	
-	def __init__(self,identificador):
+	def __init__(self,id):
 		"""Crea una instancia de el tipo _Vertice"""
-		self.id=identificador
-		self.estado="BLANCO"
-		self.vecinos=[]
-		self.aristas={}
+		self.id = id
+		self.estate = WHITE
+		self.vecinos = []
+		self. = {}
 		
 	def __cmp__(self,otro):
 		"""Comparacion que indica una relacion de orden entre los indices
@@ -45,6 +48,7 @@ class _Arista(object):
 		return "("+str(self.vert1.id)+"--"+str(self.vert2.id)+") ("+str(self.peso)+")"
 			
 class Grafo(object):
+
 	def __init__(self):
 		self.l_vertices={}
 		self.tamanio=0
@@ -91,8 +95,7 @@ class Grafo(object):
 		try:
 			return self.l_vertices[identificador]
 		except:
-			print "No existe el vertice"
-			raise ValueError
+			raise ValueError,"No existe el vertice"
 	
 	def existe(self,id_vertice):
 		return self.l_vertices.has_key(id_vertice)
@@ -125,6 +128,3 @@ class Digrafo_s(Digrafo):
 		arista=_Arista(ver_saliente,ver_entrante,peso)
 		ver_saliente.aristas[ver_entrante.id]=[arista]
 		return True
-
-g=Grafo()
-g.agregar_vertice(2)
