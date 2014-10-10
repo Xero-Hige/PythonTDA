@@ -7,12 +7,13 @@ BLACK = 1
 class _Vertex(object):
 	"""Clase vertice que modela los vertices de un grafo"""
 	
-	def __init__(self,id):
+	def __init__(self,id,data):
 		"""Crea una instancia de el tipo _Vertex"""
 		self.id = id
 		self.state = WHITE
 		self.neighbors = []
 		self.edges = {}
+		self.data = data
 
 	def get_neighbors(self):
 		return self.edges.keys()
@@ -50,13 +51,12 @@ class Graph(object):
 		self.vertex = {}
 		self.size = 0
 	
-	def add_vertex(self,id):
-		vertex = _Vertex(id)
+	def add_vertex(self,id,data=None):
+		vertex = _Vertex(id,data)
 		self.vertex[id] = vertex
-
-		size += 1
+		self.size += 1
 	
-	def add_edge(self,initial_point,end_point,weight=False):
+	def add_edge(self,initial_point,end_point,weight=1):
 		"""Pre: initial_point y end_point son vertices que existen en el grafo"""
 		
 		initial = self.vertex[initial_point]
@@ -64,8 +64,8 @@ class Graph(object):
 
 		edge = _Edge (initial,end,weight)
 
-		initial_point.edges[end_point] = edge
-		end_point.edges[initial_point] = edge
+		initial.edges[end_point] = edge
+		end.edges[initial_point] = edge
 		
 	def unmark_all(self):
 		for vertex in self.vertex.values():
@@ -83,5 +83,8 @@ class Graph(object):
 	def vertex_exists(self,vertex_id):
 		return self.vertex.has_key(id_Vertex)
 
-	def get_vertex_neigthbours(self,vertex_id):
+	def get_vertex_neighbours(self,vertex_id):
 		return self.vertex[vertex_id].get_neighbors()
+
+	def get_vertex_data(self,vertex_id):
+		return self.vertex[vertex_id].data
