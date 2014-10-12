@@ -86,5 +86,23 @@ class Graph(object):
 	def get_vertex_neighbours(self,vertex_id):
 		return self.vertex[vertex_id].get_neighbors()
 
+	def get_unmarked_vertex_neighbours(self,vertex_id):
+		neighbours = self.get_vertex_neighbours(vertex_id)
+		unmarked_neighbours = []
+		for neighbour in neighbours:
+			if( not self.is_marked(neighbour) ):
+				unmarked_neighbours.append(neighbour)
+
+		return unmarked_neighbours
+
+	def get_marked_vertex_neighbours(self,vertex_id):
+		neighbours = self.get_vertex_neighbours(vertex_id)
+		unmarked_neighbours = []
+		for neighbour in neighbours:
+			if( self.is_marked(neighbour) ):
+				unmarked_neighbours.append(neighbour)
+
+		return unmarked_neighbours
+
 	def get_vertex_data(self,vertex_id):
 		return self.vertex[vertex_id].data
