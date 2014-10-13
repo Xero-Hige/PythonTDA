@@ -46,11 +46,10 @@ def get_recommendation_for(contact_id, fb_graph):
 	return recommendation
 
 
-def get_recommendations(graph_filepath):
+def get_recommendations(fb_graph):
 	"""Devuelve una lista con una recomendacion por cada contacto
 	del archivo"""
 
-	fb_graph = parse_file(graph_filepath)
 	contacts = fb_graph.get_all_vertices_ids()
 
 	recommendations = []
@@ -79,4 +78,4 @@ def show_recommendations(graph_filepath):
 				print "(" + str(recommendation.value) + " amigos en comun)"
 
 #EJEMPLO DE USO
-show_recommendations("./network.gdf")
+show_recommendations(parse_file("./network.gdf"))
