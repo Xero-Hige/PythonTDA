@@ -106,3 +106,6 @@ class Graph(object):
 
 	def get_vertex_data(self,vertex_id):
 		return self.vertex[vertex_id].data
+
+	def get_all_vertices_ids(self):
+		return self.vertex.keys();
