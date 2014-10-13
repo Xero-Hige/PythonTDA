@@ -1,0 +1,19 @@
+nodedef>name VARCHAR,label VARCHAR,sex VARCHAR,locale VARCHAR,agerank INT
+1,A,female,es_ES,8
+2,B,male,es_LA,7
+3,C,female,es_LA,6
+4,D,female,es_LA,5
+5,E,male,en_US,4
+6,F,female,es_LA,3
+7,G,male,es_LA,2
+8,X,male,es_LA,1
+edgedef>node1 VARCHAR,node2 VARCHAR
+1,8
+1,2
+1,3
+1,4
+2,3
+2,5
+3,6
+4,6
+6,7
