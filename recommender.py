@@ -59,12 +59,11 @@ def get_recommendations(fb_graph):
 	return recommendations
 
 
-def show_recommendations(graph_filepath):
+def show_recommendations(fb_graph):
 	"""Funcion para presentar los resultados de las
 	recomendaciones por pantalla"""
 
-	recommendations = get_recommendations(graph_filepath)
-	fb_graph = parse_file(graph_filepath)
+	recommendations = get_recommendations(fb_graph)
 
 	for recommendation in recommendations:
 		print fb_graph.get_vertex_data( recommendation.receiver ) + ": ",
@@ -77,5 +76,5 @@ def show_recommendations(graph_filepath):
 			else:
 				print "(" + str(recommendation.value) + " amigos en comun)"
 
-#EJEMPLO DE USO
-show_recommendations(parse_file("./network.gdf"))
+"""#EJEMPLO DE USO
+show_recommendations(parse_file("./network.gdf"))"""

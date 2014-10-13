@@ -29,9 +29,11 @@ def get_popularity_index(fb_graph):
 	return sorted(popularity_index, key=lambda pindex: pindex.popularity, reverse=True )
 
 
-def show_popularity_index(popularity_index):
+def show_popularity_index(fb_graph):
 	"""Función para presentar el índice de 
 	popularidad por pantalla"""
+
+	popularity_index = get_popularity_index (fb_graph)
 
 	for popularity_indicator in popularity_index:
 		print popularity_indicator.id + ":",
@@ -42,6 +44,6 @@ def show_popularity_index(popularity_index):
 			print "amigos"
 			
 
-#EJEMPLO DE USO
+"""#EJEMPLO DE USO
 fb_graph = parse_file("./network.gdf")
-show_popularity_index( get_popularity_index(fb_graph) )
+show_popularity_index( get_popularity_index(fb_graph) )"""
