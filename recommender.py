@@ -50,7 +50,7 @@ def get_recommendations(fb_graph):
 	"""Devuelve una lista con una recomendacion por cada contacto
 	del archivo"""
 
-	contacts = fb_graph.get_all_vertices_ids()
+	contacts = fb_graph.get_all_vertex_ids()
 
 	recommendations = []
 	for contact in contacts:

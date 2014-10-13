@@ -19,7 +19,7 @@ def get_popularity_index(fb_graph):
 	"""Devuelve una lista de _Popularity_indicator,
 	en orden descendente por nivel de popularidad"""
 
-	contacts = fb_graph.get_all_vertices_ids()
+	contacts = fb_graph.get_all_vertex_ids()
 	popularity_index = []
 	for contact in contacts:
 		name = fb_graph.get_vertex_data(contact)

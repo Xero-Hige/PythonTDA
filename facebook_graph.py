@@ -40,11 +40,3 @@ def parse_file(file_name):
 	data_file.close()
 
 	return network
-
-'''g = parse_file("./network.gdf")
-neighbours_list = g.get_vertex_neighbours("1083522155")
-names = []
-for id in neighbours_list:
-	names.append(g.get_vertex_data(id))
-names.sort()
-print "\n".join(names)'''
