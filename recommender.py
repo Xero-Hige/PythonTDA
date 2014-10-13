@@ -73,8 +73,10 @@ def show_recommendations(graph_filepath):
 			print "no hay recomendaciones"
 		else:
 			print fb_graph.get_vertex_data( recommendation.id ),
-			print "(" + str(recommendation.value) + " amigos en comun)"
-
+			if (recommendation.value == 1):
+				print "(1 amigo en comun)"
+			else:
+				print "(" + str(recommendation.value) + " amigos en comun)"
 
 #EJEMPLO DE USO
 show_recommendations("./network.gdf")
