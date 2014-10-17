@@ -56,7 +56,8 @@ def get_recommendations(fb_graph):
 	for contact in contacts:
 		recommendations.append( get_recommendation_for(contact, fb_graph) )
 
-	return recommendations
+	#TODO: borrar
+	return sorted(recommendations)
 
 
 def show_recommendations(fb_graph):
@@ -66,15 +67,15 @@ def show_recommendations(fb_graph):
 	recommendations = get_recommendations(fb_graph)
 
 	for recommendation in recommendations:
-		print fb_graph.get_vertex_data( recommendation.receiver ) + ": ",
+		print '{0:<30s}'.format(fb_graph.get_vertex_data( recommendation.receiver )) + ": ",
 		if(recommendation.id is None):
 			print "no hay recomendaciones"
 		else:
-			print fb_graph.get_vertex_data( recommendation.id ),
+			print '{0:<30s}'.format(fb_graph.get_vertex_data( recommendation.id )),
 			if (recommendation.value == 1):
-				print "(1 amigo en comun)"
+				print "(   1 amigo en comun)"
 			else:
-				print "(" + str(recommendation.value) + " amigos en comun)"
+				print "(" + "%4s" % str(recommendation.value) + " amigos en comun)"
 
 """#EJEMPLO DE USO
 show_recommendations(parse_file("./network.gdf"))"""

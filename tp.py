@@ -6,6 +6,7 @@ import sys
 from facebook_graph import parse_file
 from popularity_meter import *
 from recommender import *
+from influence import show_influence
 
 COMMAND_POPULARITY = "POPULARITY"
 COMMAND_INFLUENCE = "INFLUENCE"
@@ -16,8 +17,11 @@ COMMAND_EXIT = "EXIT"
 
 
 def modo_automatico(facebook_graph):
+	print "------POPULARITY-----"
 	show_popularity_index(facebook_graph)
-
+	print "------INFLUENCE------"
+	show_influence(facebook_graph)
+	print ""
 	show_recommendations(facebook_graph)
 	return 0
 
@@ -54,7 +58,7 @@ def main (argv):
 			show_popularity_index(facebook_graph)
 
 		elif (command == COMMAND_INFLUENCE):
-			pass
+			show_influence(facebook_graph)
 
 		elif (command == COMMAND_RECOMENDATIONS):
 			show_recommendations(facebook_graph)

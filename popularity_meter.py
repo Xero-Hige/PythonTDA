@@ -36,12 +36,18 @@ def show_popularity_index(fb_graph):
 	popularity_index = get_popularity_index (fb_graph)
 
 	for popularity_indicator in popularity_index:
-		print popularity_indicator.id + ":",
-		print popularity_indicator.popularity,
+		
+		name = popularity_indicator.id 
+		n_friends = popularity_indicator.popularity
+
+		friends_tag = "amigos"
+		
 		if popularity_indicator.popularity == 1:
-			print "amigo"
-		else:
-			print "amigos"
+			friends_tag = "amigo"
+		
+		print '{0:<30s} : {1:>7} {2:<6}'.format(name,n_friends,friends_tag)
+		
+
 			
 
 """#EJEMPLO DE USO
