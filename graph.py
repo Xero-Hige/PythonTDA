@@ -1,6 +1,3 @@
-from heap import Heap
-from conjuntos_dis import Conjuntos_dis
-
 WHITE = 0
 BLACK = 1
 
@@ -78,7 +75,7 @@ class Graph(object):
 		self.vertex[vertex_id].state = WHITE
 
 	def is_marked(self,vertex_id):
-		return self.vertex[vertex_id].state == BLACK 
+		return self.vertex[vertex_id].state == BLACK
 	
 	def vertex_exists(self,vertex_id):
 		return self.vertex.has_key(id_Vertex)
