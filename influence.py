@@ -3,10 +3,10 @@ from collections import deque
 
 def Brand1(fb_graph):
 	C = {}
-	for w in fb_graph.vertex:
-		C[w] = 0
+	for vertex in fb_graph.vertex:
+		C[vertex] = 0
 	for s in fb_graph.vertex:
-		S = deque()
+		stack = deque()
 		P = {}
 		o = {}
 		d = {}
@@ -18,22 +18,22 @@ def Brand1(fb_graph):
 			sigma[w] = 0
 		o[s] = 1
 		d[s] = 0
-		Q = deque()
-		Q.append(s)
-		while len(Q) > 0:
-			v = Q.popleft()
-			S.append(v)
+		queue = deque()
+		queue.append(s)
+		while len(queue) > 0:
+			v = queue.popleft()
+			stack.append(v)
 			for w in fb_graph.get_vertex_neighbours(v):
 				""" w found for the first time? """
 				if d[w] < 0:
-					Q.append(w)
+					queue.append(w)
 					d[w] = d[v] + 1
 				""" Shortest path to w via v? """
 				if d[w] == d[v] + 1:
 					o[w] = o[w] + o[v]
 					P[w].append(v)
-		while len(S) > 0:
-			w = S.pop()
+		while len(stack) > 0:
+			w = stack.pop()
 			for v in P[w]:
 				sigma[v] = sigma[v] + o[v]/(float(o[w])) * (1 + sigma[w])
 				if w != s:
