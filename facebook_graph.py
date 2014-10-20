@@ -5,6 +5,8 @@ PARSER_NAME_POSITION = 1
 
 
 def parse_file(file_name):
+	"""Parsea el archivo 'gdf' con el nombre pasado como parametro
+		y genera el grafo que representa"""
 	try:
 		data_file = open(file_name,'r')
 	except IOError:

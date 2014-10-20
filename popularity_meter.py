@@ -46,10 +46,3 @@ def show_popularity_index(fb_graph):
 			friends_tag = "amigo"
 		
 		print '{0:<30s} : {1:>7} {2:<6}'.format(name,n_friends,friends_tag)
-		
-
-			
-
-"""#EJEMPLO DE USO
-fb_graph = parse_file("./network.gdf")
-show_popularity_index( get_popularity_index(fb_graph) )"""
