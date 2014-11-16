@@ -1,26 +1,23 @@
 from collections import deque
 
-#Una linea contiene un punto de inicio y una altura (el punto final la da la linea siguiente)
 class Line:
-	lx = 0
-	h = 0
+	"""Una linea contiene un punto de inicio y una altura (el punto final la da la linea siguiente)"""
+	
 	def __init__(self, lx, h):
 		self.lx = lx
 		self.h = h
 
-#Un edificio tiene un xinicial, un xfinal y una altura
 class Building:
-	lx = 0
-	h = 0
-	rx = 0
+	"""Un edificio tiene un xinicial, un xfinal y una altura"""
+	
 	def __init__(self, lx, h, rx):
 		self.lx = lx
 		self.h = h
 		self.rx = rx
 
-#Ed es una lista de edificios, ordenados por lx creciente
-#min y max son el primero y el ultimo que reviso
 def Skyline(Ed, min, max):
+	"""Ed es una lista de edificios, ordenados por lx creciente
+		min y max son el primero y el ultimo que reviso"""
 	if (min == max):
 		sk = deque()
 		sk.append(Line(Ed[min].lx,Ed[min].h))
@@ -45,7 +42,7 @@ def Merge(sk1, sk2):
 			MaxH = H1now
 			if (H2now > MaxH):
 				MaxH = H2now
-			if (LastH <> MaxH):
+			if (LastH != MaxH):
 				sk.append(Line(Xnow, MaxH))
 				LastH = MaxH
 			sk1.popleft()
@@ -55,7 +52,7 @@ def Merge(sk1, sk2):
 			MaxH = H2now
 			if (H1now > MaxH):
 				MaxH = H1now
-			if (LastH <> MaxH):
+			if (LastH != MaxH):
 				sk.append(Line(Xnow, MaxH))
 				LastH = MaxH
 			sk2.popleft()
