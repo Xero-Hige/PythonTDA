@@ -75,17 +75,22 @@ def parse_line(line):
 def parse_file(file):
         Ed = deque()
         for line in file:
-             Ed.append(parse_line(line))
+            try:
+                Ed.append(parse_line(line))
+            except:
+                print "Linea no procesada:",line
+                continue
 
         return Ed
 
 def show_skyline(skyline):
         i = len(skyline)
         for line in skyline:
-                print line.lx,",",line.h, 
+                print line.lx,
                 i-=1
                 if (i != 0):
-                        print ",",
+                        print ",",line.h,",",
+        print
 
 def main(argv):
         file_path = ""
