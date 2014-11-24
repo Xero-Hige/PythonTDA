@@ -1,4 +1,5 @@
 from collections import deque
+import sys
 
 class Line:
 	"""Una linea contiene un punto de inicio y una altura (el punto final la da la linea siguiente)"""
@@ -66,24 +67,45 @@ def Merge(sk1, sk2):
 	
 	return sk
 
-def Main():
-	b1 = Building(0,4,5)
-	b2 = Building(1,7,4)
-	b3 = Building(3,6,8)
-	b4 = Building(6,10,10)
-	b5 = Building(7,8,12)
-	b6 = Building(9,11,11)
-	Ed = deque()
-	Ed.append(b2)
-	Ed.append(b4)
-	Ed.append(b3)
-	Ed.append(b6)
-	Ed.append(b5)
-	Ed.append(b1)
-	sk = Skyline(Ed,0,5)
-	print len(sk)
-	for l in sk:
-		print(l.lx,l.h)
+def parse_line(line):
+        line = line.rstrip("\n")
+        values = line[1:len(line)-1].split(",")
+        return Building(float(values[0]),float(values[1]),float(values[2]))
 
-Main()
-	
+def parse_file(file):
+        Ed = deque()
+        for line in file:
+            try:
+                Ed.append(parse_line(line))
+            except:
+                print "Linea no procesada:",line
+                continue
+
+        return Ed
+
+def show_skyline(skyline):
+        i = len(skyline)
+        for line in skyline:
+                print line.lx,
+                i-=1
+                if (i != 0):
+                        print ",",line.h,",",
+        print
+
+def main(argv):
+        file_path = ""
+        if len(argv) < 2:
+                file_path="skyline.dat"
+
+        try:
+                file = open(file_path)
+        except:
+                return -1
+
+        Ed = parse_file(file)
+
+        sk = Skyline(Ed,0,len(Ed)-1)
+
+        show_skyline(sk)
+
+main(sys.argv)	
