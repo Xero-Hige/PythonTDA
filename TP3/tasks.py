@@ -20,6 +20,39 @@ def parse_lines(file):
 		
 
 def sort_tasks(tasks):
-	tasks.sort(key=lambda x: x.t_end)
+	tasks.sort(key=lambda x: (x.v))
 
-def 
+def generate_base_matrix(tasks):
+	row_length = tasks[-1].v
+
+	matrix = []
+
+	for x in xrange(row_length):
+		matrix.append([0]*len(tasks))
+
+	return matrix
+
+def calculate(tasks):
+	matrix = generate_base_matrix(tasks)
+
+	for i in xrange(1,len(tasks)):
+		for t in xrange(tasks[-1].v):
+			t_prim = min(t,tasks[i].v)-tasks[i].t
+
+			if t_prim < 0:
+				matrix[i][t]=matrix[i-1][t]
+			else:
+				matrix[i][t]=max(matrix[i-1][t],tasks[i].b+matrix[i-1][t_prim])
+
+	return matrix
+
+def show_result(tasks,matrix,i,t):
+	if i==0:
+		return
+
+	if matrix[i][t] == matrix[i-1][t]:
+		show_result(tasks,matrix,i-1,t)
+	else:
+		t_prim = min(t,tasks[i].v)-tasks[i].t
+		show_result(tasks,matrix,i-1,t_prim)
+		print i,
