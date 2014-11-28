@@ -1,4 +1,4 @@
-from collections import namedtouple
+from collections import namedtuple
 
 File_line = namedtuple('File_line', 't,v,b')
 Task = namedtuple('Task', 'id,t,v,b')
@@ -9,12 +9,12 @@ def parse_lines(file):
 	id = 0
 	for l in file:
 		parsed = l.split(",")
-		line = File_line.make([int(parsed[0]),int(parsed[1]),int(parsed[2])])
+		line = File_line._make([int(parsed[0]),int(parsed[1]),int(parsed[2])])
 	
-		tasks.append(Task.make([id,line.t,line.v,line.b]))
-		t_init -= 1
+		tasks.append(Task._make([id,line.t,line.v,line.b]))
 		
 		id+=1
+	return tasks
 		
 
 def sort_tasks(tasks):
@@ -31,6 +31,7 @@ def generate_base_matrix(tasks):
 	return matrix
 
 def calculate(tasks):
+	sort_tasks(tasks)
 	matrix = generate_base_matrix(tasks)
 
 	for i in xrange(1,len(tasks)):
@@ -54,3 +55,12 @@ def show_result(tasks,matrix,i,t):
 		t_prim = min(t,tasks[i].v)-tasks[i].t
 		show_result(tasks,matrix,i-1,t_prim)
 		print task[i].id,
+		
+def main():
+	f = open("tasks.tsk")
+	tasks = parse_lines(f)
+	task_matrix = calculate(tasks)
+	show_result(tasks,task_matrix,len(tasks_matrix[0])-1,len(task_matrix)-1)
+	f.close()
+
+main()
