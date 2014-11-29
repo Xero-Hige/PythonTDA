@@ -6,7 +6,7 @@ Task = namedtuple('Task', 'id,t,v,b')
 
 def parse_lines(file):
 	tasks = []
-	id = 0
+	id = 1
 	for l in file:
 		parsed = l.split(",")
 		line = File_line._make([int(parsed[0]),int(parsed[1]),int(parsed[2])])
@@ -25,13 +25,14 @@ def generate_base_matrix(tasks):
 
 	matrix = []
 
-	for x in xrange(row_length):
-		matrix.append([0]*len(tasks))
+	for x in xrange(len(tasks)):
+		matrix.append([0]*row_length)
 
 	return matrix
 
 def calculate(tasks):
 	sort_tasks(tasks)
+	tasks = [None]+tasks
 	matrix = generate_base_matrix(tasks)
 
 	for i in xrange(1,len(tasks)):
@@ -54,13 +55,13 @@ def show_result(tasks,matrix,i,t):
 	else:
 		t_prim = min(t,tasks[i].v)-tasks[i].t
 		show_result(tasks,matrix,i-1,t_prim)
-		print task[i].id,
+		print tasks[i].id,
 		
 def main():
 	f = open("tasks.tsk")
 	tasks = parse_lines(f)
 	task_matrix = calculate(tasks)
-	show_result(tasks,task_matrix,len(tasks_matrix[0])-1,len(task_matrix)-1)
+	show_result(tasks,task_matrix,len(tasks)-1,len(task_matrix[0])-1)
 	f.close()
 
 main()
