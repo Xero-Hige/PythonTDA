@@ -21,7 +21,7 @@ def sort_tasks(tasks):
 	tasks.sort(key=lambda x: (x.v))
 
 def generate_base_matrix(tasks):
-	row_length = tasks[-1].v
+	row_length = tasks[-1].v+1
 
 	matrix = []
 
@@ -35,7 +35,7 @@ def calculate(tasks):
 	tasks = [None]+tasks
 	matrix = generate_base_matrix(tasks)
 
-	for i in xrange(1,len(tasks)):
+        for i in xrange(1,len(tasks)):
 		for t in xrange(tasks[-1].v):
 			t_prim = min(t,tasks[i].v)-tasks[i].t
 
@@ -61,7 +61,8 @@ def main():
 	f = open("tasks.tsk")
 	tasks = parse_lines(f)
 	task_matrix = calculate(tasks)
-	show_result(tasks,task_matrix,len(tasks)-1,len(task_matrix[0])-1)
+        print task_matrix
+	show_result(tasks,task_matrix,len(tasks),len(task_matrix[0])-1)
 	f.close()
 
 main()
