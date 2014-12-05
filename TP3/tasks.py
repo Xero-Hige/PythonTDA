@@ -1,7 +1,7 @@
 from collections import namedtuple
 
 File_line = namedtuple('File_line', 't,v,b')
-Task = namedtuple('Task', 'id,t,v,b')
+Task = namedtuple('Task', 'id,duration,deadline,benefit')
 
 
 def parse_lines(file):
@@ -18,10 +18,10 @@ def parse_lines(file):
 		
 
 def sort_tasks(tasks):
-	tasks.sort(key=lambda x: (x.v))
+	tasks.sort(key=lambda x: (x.deadline))
 
 def generate_base_matrix(tasks):
-	row_length = tasks[-1].v+1
+	row_length = tasks[-1].deadline + 1
 
 	matrix = []
 
@@ -31,18 +31,16 @@ def generate_base_matrix(tasks):
 	return matrix
 
 def calculate(tasks):
-	sort_tasks(tasks)
-	tasks = [None]+tasks
 	matrix = generate_base_matrix(tasks)
 
-        for i in xrange(1,len(tasks)):
-		for t in xrange(tasks[-1].v):
-			t_prim = min(t,tasks[i].v)-tasks[i].t
+	for i in xrange(1,len(tasks)):
+		for t in xrange(tasks[-1].deadline+1):
+			t_prim = min(t,tasks[i].deadline)-tasks[i].duration
 
 			if t_prim < 0:
 				matrix[i][t]=matrix[i-1][t]
 			else:
-				matrix[i][t]=max(matrix[i-1][t],tasks[i].b+matrix[i-1][t_prim])
+				matrix[i][t]=max(matrix[i-1][t],tasks[i].benefit+matrix[i-1][t_prim])
 
 	return matrix
 
@@ -53,16 +51,25 @@ def show_result(tasks,matrix,i,t):
 	if matrix[i][t] == matrix[i-1][t]:
 		show_result(tasks,matrix,i-1,t)
 	else:
-		t_prim = min(t,tasks[i].v)-tasks[i].t
+		t_prim = min(t,tasks[i].deadline)-tasks[i].duration
 		show_result(tasks,matrix,i-1,t_prim)
 		print tasks[i].id,
 		
 def main():
 	f = open("tasks.tsk")
 	tasks = parse_lines(f)
+	
+	sort_tasks(tasks)			#Ordeno segun vencimiento creciente
+
+	tasks = [None] + tasks 		#Agrego una tarea none solo para que coincidan los
+								#indices de las tareas con el numero de tarea (no es el id)
+
 	task_matrix = calculate(tasks)
-        print task_matrix
-	show_result(tasks,task_matrix,len(tasks),len(task_matrix[0])-1)
+
+	number_of_tasks = len(tasks)-1 	#La tarea que es none no se considera
+	time = len(task_matrix[0])-1 	#Solo los indices validos (coindide con 0 a Vmax)
+
+	show_result(tasks,task_matrix,number_of_tasks,time)
 	f.close()
 
 main()
